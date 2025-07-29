@@ -1,30 +1,47 @@
 function updateTimer() {
-    const startDate = new Date(document.getElementById('startDate').textContent);
+    const startDateElement = document.getElementById('startDate');
+    if (!startDateElement) {
+        return;
+    }
+    const startDate = new Date(startDateElement.textContent);
     const now = new Date();
 
-    let months = 0;
-    let days = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-    
-    while (days >= 30) {
-        days -= 30;
-        months++;
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
+
+    if (days < 0) {
+        months--;
+        const lastMonthDate = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += lastMonthDate.getDate();
     }
 
-    const hours = Math.floor((now - startDate) / (1000 * 60 * 60)) % 24;
-    const minutes = Math.floor((now - startDate) / (1000 * 60)) % 60;
-    const seconds = Math.floor((now - startDate) / 1000) % 60;
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
 
+    const totalTimeDifferenceMs = now - startDate;
+    const hours = Math.floor((totalTimeDifferenceMs / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((totalTimeDifferenceMs / (1000 * 60)) % 60);
+    const seconds = Math.floor((totalTimeDifferenceMs / 1000)) % 60;
+
+    const formatNumber = (num) => num < 10 ? '0' + num : num;
+
+    document.getElementById('years').innerText = years;
     document.getElementById('months').innerText = months;
     document.getElementById('days').innerText = days;
-    document.getElementById('hours').innerText = hours;
-    document.getElementById('minutes').innerText = minutes;
-    document.getElementById('seconds').innerText = seconds;
+    document.getElementById('hours').innerText = formatNumber(hours);
+    document.getElementById('minutes').innerText = formatNumber(minutes);
+    document.getElementById('seconds').innerText = formatNumber(seconds);
 }
 
 setInterval(updateTimer, 1000);
 updateTimer();
 
 function togglePopup() {
-    var popup = document.getElementById('popup');
-    popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+    const popup = document.getElementById('popup');
+    if (popup) {
+        popup.classList.toggle('active');
+    }
 }
