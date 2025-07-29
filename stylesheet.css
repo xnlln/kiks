@@ -109,6 +109,10 @@
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+/* New label for years */
+.container .countdownbx .countdown div#years:before {
+    content: 'years';
+}
 
 .container .countdownbx .countdown div#months:before {
     content: 'months';
@@ -166,6 +170,10 @@
     border-radius: 10px
 }
 
+.popup.active {
+    display: block; /* Makes the popup visible when the 'active' class is present */
+}
+
 .popup img {
     width: 100%;
     max-width: 100%;
@@ -195,7 +203,7 @@
     color: #000;
 }
 
-@media (max-width: 991px) 
+@media (max-width: 991px)
 {
     .container .imgbx
     {
@@ -221,7 +229,7 @@
 }
 
 @media (max-width: 600px) {
-    .container .countdownbx h2 
+    .container .countdownbx h2
     {
         font-size: 1.1em;
     }
@@ -237,6 +245,6 @@
     .popup img {
         width: auto;
         max-width: 400px;
-        height: auto; 
+        height: auto;
     }
 }
