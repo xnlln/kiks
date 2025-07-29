@@ -109,7 +109,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
 }
-/* New label for years */
+
 .container .countdownbx .countdown div#years:before {
     content: 'years';
 }
@@ -171,7 +171,7 @@
 }
 
 .popup.active {
-    display: block; /* Makes the popup visible when the 'active' class is present */
+    display: block;
 }
 
 .popup img {
