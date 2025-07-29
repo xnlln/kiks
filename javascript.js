@@ -21,6 +21,16 @@ function updateTimer() {
         months += 12;
     }
 
+    let totalMonths = (now.getFullYear() - startDate.getFullYear()) * 12;
+    totalMonths += now.getMonth() - startDate.getMonth();
+
+    if (now.getDate() < startDate.getDate()) {
+        totalMonths--;
+    }
+
+    years = Math.floor(totalMonths / 12);
+    months = totalMonths % 12;
+
     const totalTimeDifferenceMs = now - startDate;
     const hours = Math.floor((totalTimeDifferenceMs / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((totalTimeDifferenceMs / (1000 * 60)) % 60);
